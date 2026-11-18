@@ -163,9 +163,15 @@
     return regionOk || filOk;
   }
 
+  function statusPill(o) {
+    var open = o.status !== 'Clôturé';
+    return '<span class="inline-block px-2 py-0.5 rounded-lg text-[11.5px] font-bold ' + (open ? 'bg-emerald-100 text-xamle-green' : 'bg-slate-200 text-slate-700') + '">' + esc(o.status) + '</span>';
+  }
+  function byStatus(a, b) { return (a.status === 'Clôturé') - (b.status === 'Clôturé'); }
+
   function oppCard(o) {
     return '<button type="button" onclick="openOpportunity(\'' + o.id + '\')" class="card w-full text-left space-y-2 hover:border-xamle-green transition">' +
-      '<span class="inline-block px-2 py-0.5 rounded-lg bg-amber-100 text-amber-900 text-[11.5px] font-bold">' + esc(o.type) + '</span>' +
+      '<span class="flex gap-1.5 flex-wrap"><span class="inline-block px-2 py-0.5 rounded-lg bg-amber-100 text-amber-900 text-[11.5px] font-bold">' + esc(o.type) + '</span>' + statusPill(o) + '</span>' +
       '<span class="block text-[14px] font-bold leading-snug">' + esc(o.title) + '</span>' +
       '<span class="block text-[12.5px] text-slate-600">' + esc(o.org) + ' • ' + esc(o.regions.join(', ')) + '</span>' +
       '<span class="flex items-center gap-1.5 text-[12.5px] text-slate-600"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Date limite : ' + esc(o.deadline) + '</span>' +
@@ -181,7 +187,7 @@
     var isProducer = appState.userRole === 'PRODUCTEUR';
     var gie = guidesData[0];
     var gieStep = appState.guideProgress[gie.id] || 0;
-    var forYou = oppData.filter(matchesProfile).slice(0, 2);
+    var forYou = oppData.filter(matchesProfile).sort(byStatus).slice(0, 2);
 
     $('main-content').innerHTML =
       '<section class="bg-gradient-to-br from-xamle-green via-xamle-green to-xamle-blue rounded-3xl p-4 text-white shadow-md space-y-2">' +
@@ -714,8 +720,9 @@
       segmented([['OPPORTUNITES', 'Financements'], ['VITRINES', 'Vitrines']], sub, 'setOppSubTab');
 
     if (sub === 'OPPORTUNITES') {
-      var types = ['TOUTES', 'Subvention', 'Appel à projets', 'Crédit'];
-      var list = oppData.filter(function (o) { return appState.oppFilter === 'TOUTES' || o.type === appState.oppFilter; });
+      var types = ['TOUTES'].concat(oppData.map(function (o) { return o.type; }).filter(function (t, i, a) { return a.indexOf(t) === i; }));
+      if (types.indexOf(appState.oppFilter) === -1) appState.oppFilter = 'TOUTES';
+      var list = oppData.filter(function (o) { return appState.oppFilter === 'TOUTES' || o.type === appState.oppFilter; }).sort(byStatus);
       html += '<div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-0.5">' +
           types.map(function (t) { var on = appState.oppFilter === t; return '<button type="button" aria-pressed="' + on + '" onclick="setOppFilter(\'' + t + '\')" class="filter-chip ' + (on ? 'is-on' : '') + '">' + (t === 'TOUTES' ? 'Toutes' : t) + '</button>'; }).join('') +
         '</div>' +
@@ -750,12 +757,14 @@
     if (!o) return;
     openModal(
       '<div class="space-y-4">' +
-        '<div class="flex items-start justify-between gap-2"><div class="space-y-1.5"><span class="pill bg-amber-100 text-amber-900">' + esc(o.type) + '</span><h2 class="text-[18px] font-extrabold leading-snug">' + esc(o.title) + '</h2><p class="text-[13px] text-slate-600">Proposé par ' + esc(o.org) + '</p></div>' + closeBtn() + '</div>' +
+        '<div class="flex items-start justify-between gap-2"><div class="space-y-1.5"><span class="flex gap-1.5"><span class="pill bg-amber-100 text-amber-900">' + esc(o.type) + '</span>' + statusPill(o) + '</span><h2 class="text-[18px] font-extrabold leading-snug">' + esc(o.title) + '</h2><p class="text-[13px] text-slate-600">Proposé par ' + esc(o.org) + '</p></div>' + closeBtn() + '</div>' +
         '<div class="grid grid-cols-2 gap-2.5"><div class="p-3 rounded-xl bg-xamle-bg"><p class="text-[11.5px] text-slate-600">Montant</p><p class="text-[14px] font-bold">' + esc(o.amount) + '</p></div>' +
           '<div class="p-3 rounded-xl bg-xamle-bg"><p class="text-[11.5px] text-slate-600">Date limite</p><p class="text-[14px] font-bold">' + esc(o.deadline) + '</p></div></div>' +
         '<div class="space-y-1.5"><h3 class="text-[14px] font-bold">Qui peut postuler ?</h3><ul class="list-disc pl-5 text-[13px] leading-relaxed">' + o.conditions.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('') + '</ul></div>' +
         '<div class="space-y-1.5"><h3 class="text-[14px] font-bold">Pièces à fournir</h3><ul class="list-disc pl-5 text-[13px] leading-relaxed">' + o.docs.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('') + '</ul></div>' +
-        '<button type="button" onclick="showToast(\'Lien vers le site officiel à renseigner.\')" class="btn-primary w-full !min-h-[48px] flex items-center justify-center gap-2"><i data-lucide="external-link" class="w-4 h-4"></i> Postuler sur le site officiel</button>' +
+        (o.status === 'Clôturé' ? '<p class="text-[12.5px] text-slate-700 bg-slate-100 rounded-xl p-2.5">Cet appel est clôturé. Il est affiché à titre d\'exemple ; XAMLE AGRI vous alertera à la prochaine édition.</p>' : '') +
+        '<a href="' + esc(o.link) + '" target="_blank" rel="noopener" class="btn-primary w-full !min-h-[48px] flex items-center justify-center gap-2"><i data-lucide="external-link" class="w-4 h-4"></i> ' + (o.status === 'Clôturé' ? 'Voir l\'annonce officielle' : 'En savoir plus') + '</a>' +
+        '<p class="text-[11.5px] text-slate-500">Source : ' + esc(o.source) + '</p>' +
         '<a class="btn-outline w-full flex items-center justify-center gap-2" target="_blank" rel="noopener" href="https://wa.me/?text=' + encodeURIComponent('XAMLE AGRI — ' + o.type + ' : ' + o.title) + '"><i data-lucide="share-2" class="w-4 h-4"></i> Partager sur WhatsApp</a>' +
       '</div>'
     );

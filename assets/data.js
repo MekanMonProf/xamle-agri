@@ -341,99 +341,173 @@ window.XAMLE_DATA = {
     ],
     "opportunities": [
         {
-            "id": "opp1",
-            "type": "Subvention",
-            "title": "Équipement d'irrigation — maraîchage",
-            "org": "[Organisme à confirmer]",
-            "regions": [
-                "Thiès"
-            ],
-            "filieres": [
-                "Maraîchage"
-            ],
-            "amount": "[à renseigner]",
-            "deadline": "[à renseigner]",
-            "conditions": [
-                "[Condition 1]",
-                "[Condition 2]",
-                "[Condition 3]"
-            ],
-            "docs": [
-                "[Pièce 1]",
-                "[Pièce 2]"
-            ]
-        },
-        {
-            "id": "opp2",
-            "type": "Appel à projets",
-            "title": "Unités de transformation locale",
-            "org": "[Organisme à confirmer]",
+            "id": "campagne-2026",
+            "type": "Programme",
+            "status": "En cours",
+            "title": "Intrants subventionnés — campagne agricole 2026-2027",
+            "org": "État du Sénégal (ministère de l'Agriculture, de la Souveraineté alimentaire et de l'Élevage)",
             "regions": [
                 "Toutes régions"
             ],
             "filieres": [
-                "Transformation"
+                "Arachide",
+                "Riz",
+                "Mil",
+                "Élevage",
+                "Maraîchage"
             ],
-            "amount": "[à renseigner]",
-            "deadline": "[à renseigner]",
+            "amount": "Enveloppe nationale de 130 milliards FCFA",
+            "deadline": "Selon le calendrier de la campagne",
             "conditions": [
-                "[Condition 1]",
-                "[Condition 2]"
+                "Être enrôlé au Registre national unique (distribution numérique des intrants)",
+                "Au moins 30 % des intrants réservés aux femmes et aux jeunes",
+                "Riz : contractualisation entre producteurs, riziers et distributeurs",
+                "Élevage : intrants d'ensilage de maïs fournis gratuitement (5 000 ha)"
             ],
             "docs": [
-                "[Pièce 1]",
-                "[Pièce 2]"
-            ]
+                "Pièce d'identité",
+                "Informations sur la parcelle (géolocalisation lors de l'enrôlement)"
+            ],
+            "link": "https://lesoleil.sn/actualites/economie/campagne-agricole-2026-2027-letat-mobilise-130-milliards-de-fcfa/",
+            "source": "Le Soleil, juillet 2026"
         },
         {
-            "id": "opp3",
-            "type": "Crédit",
-            "title": "Équipement agricole",
-            "org": "[Organisme à confirmer]",
+            "id": "investo-2026",
+            "type": "Subvention",
+            "status": "Clôturé",
+            "title": "Investo in Senegal — subventions ESS (agriculture, élevage, transformation)",
+            "org": "Projet Investo in Senegal (Coopération italienne AICS, AMREF, E4Impact)",
             "regions": [
+                "Louga",
+                "Matam",
+                "Saint-Louis",
+                "Thiès"
+            ],
+            "filieres": [
+                "Maraîchage",
+                "Arachide",
+                "Riz",
+                "Mil",
+                "Élevage",
+                "Aviculture",
+                "Pisciculture",
+                "Transformation"
+            ],
+            "amount": "4 000 à 20 000 € (≈ 2,6 à 13,1 millions FCFA)",
+            "deadline": "16 août 2026",
+            "conditions": [
+                "Coopératives, GIE, associations, entreprises sociales (formalisés en priorité)",
+                "Équipe de 2 à 5 personnes",
+                "Chiffre d'affaires annuel ≥ 50 % du montant demandé et capacité de cofinancement",
+                "Exclus : simple achat-revente et immobilier"
+            ],
+            "docs": [
+                "Formulaire en ligne (adresse Gmail obligatoire)",
+                "Justificatifs d'éligibilité (NINEA, récépissé…)"
+            ],
+            "link": "https://investoinsenegal.eu/",
+            "source": "Lignes directrices Investo in Senegal, juillet 2026"
+        },
+        {
+            "id": "papes-2026",
+            "type": "Subvention",
+            "status": "Clôturé",
+            "title": "PAPeS — petites subventions pour l'agroécologie (cycle 2)",
+            "org": "IED Afrique",
+            "regions": [
+                "Dakar",
                 "Thiès",
-                "Louga"
+                "Louga",
+                "Diourbel",
+                "Fatick",
+                "Kaffrine",
+                "Kaolack",
+                "Matam",
+                "Saint-Louis"
+            ],
+            "filieres": [
+                "Maraîchage",
+                "Arachide",
+                "Mil",
+                "Élevage",
+                "Transformation",
+                "Pisciculture",
+                "Apiculture"
+            ],
+            "amount": "Jusqu'à 3 000 000 FCFA",
+            "deadline": "10 mai 2026",
+            "conditions": [
+                "Organisation communautaire formalisée (pas d'individus)",
+                "Pratiques agroécologiques déjà en place (pas de nouveau lancement)",
+                "Compte bancaire et expérience de petits projets",
+                "Activités terminées en 8 mois ; jeunes et femmes encouragés"
+            ],
+            "docs": [
+                "Formulaire de demande",
+                "NINEA, registre de commerce ou récépissé",
+                "Factures proforma pour le décaissement"
+            ],
+            "link": "https://www.iedafrique.org/",
+            "source": "Appel à projets PAPeS 2026, IED Afrique"
+        },
+        {
+            "id": "ayute-2026",
+            "type": "Concours",
+            "status": "Clôturé",
+            "title": "AYuTe Africa Challenge Sénégal — 5e édition (agritech jeunes)",
+            "org": "Heifer International Sénégal, avec le ministère de l'Agriculture",
+            "regions": [
+                "Toutes régions"
             ],
             "filieres": [
                 "Maraîchage",
                 "Élevage",
-                "Aviculture"
+                "Aviculture",
+                "Transformation",
+                "Riz",
+                "Mil",
+                "Arachide"
             ],
-            "amount": "[à renseigner]",
-            "deadline": "[à renseigner]",
+            "amount": "Subventions et accompagnement (montant de l'édition non précisé)",
+            "deadline": "15 janvier 2026",
             "conditions": [
-                "[Condition 1]",
-                "[Condition 2]"
+                "Jeunes agripreneurs porteurs d'une solution agritech",
+                "Impact sur l'emploi des jeunes et des femmes rurales"
             ],
             "docs": [
-                "[Pièce 1]",
-                "[Pièce 2]"
-            ]
+                "Dossier de candidature en ligne"
+            ],
+            "link": "https://www.lejecos.com/Lancement-de-la-5%E1%B5%89-edition-du-AYuTe-Africa-Challenge-Senegal-La-jeunesse-au-coeur-de-la-revolution-agricole_a29905.html",
+            "source": "Lejecos / AllAfrica, novembre 2025"
         },
         {
-            "id": "opp4",
-            "type": "Subvention",
-            "title": "Poulaillers modernes ventilés",
-            "org": "[Organisme à confirmer]",
+            "id": "vitagro-2026",
+            "type": "Incubation",
+            "status": "Clôturé",
+            "title": "Incubation VITAGRO / NOVAGRI 2026",
+            "org": "VITAGRO (centre d'excellence NOVAGRI)",
             "regions": [
-                "Dakar",
-                "Thiès",
-                "Diourbel"
+                "Dakar"
             ],
             "filieres": [
-                "Aviculture",
-                "Élevage"
+                "Maraîchage",
+                "Élevage",
+                "Pisciculture",
+                "Transformation"
             ],
-            "amount": "[à renseigner]",
-            "deadline": "[à renseigner]",
+            "amount": "Hébergement, équipements, formation, mentorat (pas de subvention en numéraire)",
+            "deadline": "30 novembre 2025",
             "conditions": [
-                "[Condition 1]",
-                "[Condition 2]"
+                "Startups, jeunes, coopératives, PME en démarrage",
+                "Structure formalisée ou en cours de formalisation"
             ],
             "docs": [
-                "[Pièce 1]",
-                "[Pièce 2]"
-            ]
+                "Présentation du projet",
+                "Modèle économique",
+                "Description de l'équipe"
+            ],
+            "link": "https://vitagro.sn/incubation-dentreprises-candidature/",
+            "source": "Guindima, octobre 2025"
         }
     ],
     "products": [
