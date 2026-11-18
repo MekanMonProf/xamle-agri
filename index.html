@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#347574">
+<title>Connexion — XAMLE AGRI</title>
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body data-page="connexion">
+<aside class="side-panel hidden lg:flex flex-col max-w-sm mr-12 text-xamle-text space-y-5">
+  <div class="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-sm">
+    <img src="assets/logo-full.png" alt="XAMLE AGRI — Assistance, Formalisation, B2B" class="w-full max-w-[300px] h-auto shrink-0 object-contain" >
+    <p class="text-sm text-slate-600 leading-relaxed mt-4">
+      Prototype du guichet unique digital pour les producteurs, GIE, coopératives et acheteurs professionnels au Sénégal.
+    </p>
+  </div>
+  <div class="bg-white/90 p-5 rounded-3xl border border-slate-200/80 shadow-sm space-y-3 text-sm">
+    <p class="font-bold text-xamle-green uppercase tracking-wider text-xs">Parcours de démonstration</p>
+    <ol class="space-y-2.5 text-slate-700">
+      <li class="flex items-start gap-2"><span class="step-chip bg-xamle-blueLight text-xamle-blue">01</span><span><strong>Connexion</strong> par numéro de téléphone et code (affiché à l'écran, aucun SMS envoyé).</span></li>
+      <li class="flex items-start gap-2"><span class="step-chip bg-xamle-greenPale text-xamle-green">02</span><span><strong>Profil</strong> : type d'acteur, région, filières.</span></li>
+      <li class="flex items-start gap-2"><span class="step-chip bg-xamle-blueLight text-xamle-blue">03</span><span><strong>Formaliser</strong> : guides pas à pas et démarche en ligne simulée.</span></li>
+      <li class="flex items-start gap-2"><span class="step-chip bg-xamle-greenPale text-xamle-green">04</span><span><strong>Assistance, B2B, Opportunités</strong> : annuaire, assistant vocal, contrats, financements.</span></li>
+    </ol>
+    <p class="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-xl p-2.5">Toutes les données affichées sont fictives ou à confirmer.</p>
+  </div>
+</aside>
+
+<div class="phone-chassis">
+  <div class="status-bar bg-white text-xamle-text px-6 pt-3 pb-1.5 flex items-center justify-between text-[12px] font-semibold z-30 select-none" aria-hidden="true">
+    <span>09:41</span>
+    <div class="w-24 h-5 bg-neutral-900 rounded-full"></div>
+    <span class="flex items-center gap-1.5">
+      <i data-lucide="signal" class="w-3.5 h-3.5"></i><i data-lucide="wifi" class="w-3.5 h-3.5"></i><i data-lucide="battery-full" class="w-4 h-4 text-xamle-green"></i>
+    </span>
+  </div>
+<main class="auth-screen flex-1 flex flex-col bg-xamle-bg overflow-y-auto">
+  <form id="login-form" class="flex-1 flex flex-col" novalidate>
+    <div class="flex justify-end px-5 pt-5">
+      <div role="group" aria-label="Langue" class="flex bg-white border border-slate-200 rounded-full p-1">
+        <button type="button" data-lang="FR"
+          class="lang-btn is-active" aria-pressed="true">Français</button>
+        <button type="button" data-lang="WO"
+          class="lang-btn " aria-pressed="false">Wolof</button>
+      </div>
+    </div>
+
+    <div class="flex-1 flex flex-col px-6 pt-10 pb-8 gap-7">
+      <div class="flex flex-col gap-4">
+        <h1 class="sr-only">XAMLE AGRI</h1>
+        <img src="assets/logo-full.png" alt="XAMLE AGRI — Assistance, Formalisation, B2B" class="w-[260px] h-auto -ml-1 shrink-0 object-contain" >
+        <p id="wo-note" class="hidden text-[13px] text-xamle-blue bg-xamle-blueLight rounded-xl px-3 py-2">Interface wolof en préparation : l'assistant vocal répondra en wolof.</p>
+        <div class="flex flex-col gap-2">
+          <p class="text-base leading-relaxed text-slate-600">Formalisez votre activité, trouvez des financements et vendez à des acheteurs professionnels.</p>
+        </div>
+              </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="tel" class="text-sm font-semibold">Numéro de téléphone</label>
+        <div class="flex gap-2">
+          <span class="flex items-center px-3.5 min-h-[52px] bg-white border border-slate-200 rounded-2xl text-base font-semibold">+221</span>
+          <input id="tel" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" required
+            value="77 000 00 00" placeholder="77 000 00 00"
+            class="field flex-1 min-w-0 "
+            aria-describedby="tel-help tel-error">
+        </div>
+                <p id="tel-error" class="field-error hidden" aria-live="polite"></p>
+        <p id="tel-help" class="text-[13px] text-slate-500">Vous recevrez un code de vérification.</p>
+      </div>
+
+      <div class="mt-auto flex flex-col gap-3.5">
+        <button type="submit" class="btn-primary">Recevoir le code</button>
+        <p class="text-center text-xs leading-relaxed text-slate-500">En continuant, vous acceptez les conditions d'utilisation et la politique de confidentialité.</p>
+      </div>
+    </div>
+  </form>
+</main>
+  <div class="home-indicator absolute bottom-1.5 inset-x-0 flex justify-center pointer-events-none z-40" aria-hidden="true">
+    <div class="w-32 h-1 bg-slate-800/25 rounded-full"></div>
+  </div>
+</div><!-- /.phone-chassis -->
+<script src="assets/data.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="assets/auth.js"></script>
+<script>try { lucide.createIcons(); } catch (e) {}</script>
+</body>
+</html>

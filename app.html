@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#347574">
+<title>Accueil — XAMLE AGRI</title>
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body data-page="app">
+<aside class="side-panel hidden lg:flex flex-col max-w-sm mr-12 text-xamle-text space-y-5">
+  <div class="bg-white p-5 rounded-3xl border border-slate-200/80 shadow-sm">
+    <img src="assets/logo-full.png" alt="XAMLE AGRI — Assistance, Formalisation, B2B" class="w-full max-w-[300px] h-auto shrink-0 object-contain" >
+    <p class="text-sm text-slate-600 leading-relaxed mt-4">
+      Prototype du guichet unique digital pour les producteurs, GIE, coopératives et acheteurs professionnels au Sénégal.
+    </p>
+  </div>
+  <div class="bg-white/90 p-5 rounded-3xl border border-slate-200/80 shadow-sm space-y-3 text-sm">
+    <p class="font-bold text-xamle-green uppercase tracking-wider text-xs">Parcours de démonstration</p>
+    <ol class="space-y-2.5 text-slate-700">
+      <li class="flex items-start gap-2"><span class="step-chip bg-xamle-blueLight text-xamle-blue">01</span><span><strong>Connexion</strong> par numéro de téléphone et code (affiché à l'écran, aucun SMS envoyé).</span></li>
+      <li class="flex items-start gap-2"><span class="step-chip bg-xamle-greenPale text-xamle-green">02</span><span><strong>Profil</strong> : type d'acteur, région, filières.</span></li>
+      <li class="flex items-start gap-2"><span class="step-chip bg-xamle-blueLight text-xamle-blue">03</span><span><strong>Formaliser</strong> : guides pas à pas et démarche en ligne simulée.</span></li>
+      <li class="flex items-start gap-2"><span class="step-chip bg-xamle-greenPale text-xamle-green">04</span><span><strong>Assistance, B2B, Opportunités</strong> : annuaire, assistant vocal, contrats, financements.</span></li>
+    </ol>
+    <p class="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-xl p-2.5">Toutes les données affichées sont fictives ou à confirmer.</p>
+  </div>
+</aside>
+
+<div class="phone-chassis">
+  <div class="status-bar bg-white text-xamle-text px-6 pt-3 pb-1.5 flex items-center justify-between text-[12px] font-semibold z-30 select-none" aria-hidden="true">
+    <span>09:41</span>
+    <div class="w-24 h-5 bg-neutral-900 rounded-full"></div>
+    <span class="flex items-center gap-1.5">
+      <i data-lucide="signal" class="w-3.5 h-3.5"></i><i data-lucide="wifi" class="w-3.5 h-3.5"></i><i data-lucide="battery-full" class="w-4 h-4 text-xamle-green"></i>
+    </span>
+  </div>
+<header class="bg-white px-4 pt-1.5 pb-3 border-b border-slate-200/80 z-20">
+  <div class="flex items-center justify-between">
+    <button type="button" onclick="switchTab('accueil')" class="flex items-center gap-2 text-left" aria-label="Accueil XAMLE AGRI">
+      <img src="assets/logo-mark.png" alt="" class="w-10 h-10 shrink-0 object-contain" aria-hidden="true">
+      <span>
+        <span class="block font-display font-extrabold text-[16px] leading-[1.05] tracking-tight text-xamle-text">XAMLE<br>AGRI</span>
+      </span>
+    </button>
+    <div class="flex items-center gap-1.5">
+      <button type="button" onclick="switchTab('formalisation')" id="header-status-badge" class="status-badge is-informal">
+        <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span><span>Informel</span>
+      </button>
+      <button type="button" onclick="openNotificationsModal()" aria-label="Notifications" class="relative p-2.5 rounded-full bg-xamle-bg hover:bg-slate-200/70 transition">
+        <i data-lucide="bell" class="w-4 h-4"></i>
+        <span id="notif-dot" class="absolute top-2 right-2 w-2 h-2 rounded-full bg-xamle-blue ring-2 ring-white"></span>
+      </button>
+      <a href="profil.html" aria-label="Modifier mon profil" class="p-2.5 rounded-full bg-xamle-bg hover:bg-slate-200/70 transition">
+        <i data-lucide="user-round" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </div>
+  <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between gap-2 text-[12.5px]">
+    <div class="flex items-center gap-1.5 text-slate-600 min-w-0">
+      <i data-lucide="map-pin" class="w-3.5 h-3.5 text-xamle-green shrink-0"></i>
+      <span id="header-user-label" class="font-semibold text-xamle-text truncate"></span>
+    </div>
+    <button type="button" onclick="toggleUserRole()" class="shrink-0 bg-xamle-blueLight text-xamle-blue font-bold px-2 py-1 rounded-md text-[11.5px] flex items-center gap-1 hover:bg-xamle-blue hover:text-white transition">
+      <i data-lucide="repeat" class="w-3 h-3"></i><span id="role-switch-label">Mode Acheteur</span>
+    </button>
+  </div>
+</header>
+
+<div class="bg-amber-50 border-b border-amber-200 text-amber-900 text-[11.5px] font-semibold px-4 py-1.5 flex items-center justify-between gap-2 z-20">
+  <span>Prototype de démonstration — données fictives</span>
+  <span class="flex items-center gap-3 shrink-0">
+    <button type="button" onclick="resetDemo()" class="underline font-bold">Réinitialiser</button>
+    <button type="button" onclick="logout()" class="underline font-bold">Déconnexion</button>
+  </span>
+</div>
+
+<main id="main-content" class="flex-1 overflow-y-auto no-scrollbar pb-28 px-4 pt-3.5 space-y-4 bg-xamle-bg" tabindex="-1" aria-live="polite"></main>
+
+<div id="toast-box" role="status" class="hidden absolute top-28 left-4 right-4 bg-xamle-text/95 text-white px-4 py-3 rounded-2xl shadow-xl z-50 flex items-center gap-3 text-[13px] border border-slate-700">
+  <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0"><i data-lucide="check" class="w-4 h-4"></i></span>
+  <span id="toast-message" class="font-medium leading-snug">Action enregistrée.</span>
+</div>
+
+<div id="modal-backdrop" class="hidden absolute inset-0 bg-slate-900/60 z-40 flex items-end justify-center">
+  <div id="modal-container" role="dialog" aria-modal="true" class="bg-white w-full max-h-[86%] rounded-t-3xl p-5 overflow-y-auto no-scrollbar shadow-2xl border-t border-slate-200"></div>
+</div>
+
+<nav aria-label="Navigation principale" class="absolute bottom-0 inset-x-0 bg-white border-t border-slate-200 px-1 pt-2 pb-5 flex items-end z-30">
+  <button type="button" onclick="switchTab('accueil')" data-tab="accueil" class="nav-btn"><i data-lucide="house" class="w-5 h-5"></i><span>Accueil</span></button>
+  <button type="button" onclick="switchTab('formalisation')" data-tab="formalisation" class="nav-btn"><i data-lucide="file-check-2" class="w-5 h-5"></i><span>Formaliser</span></button>
+  <div class="flex-1 relative -top-4 flex flex-col items-center">
+    <button type="button" onclick="openVoiceModal()" aria-label="Assistant vocal (français, wolof, pulaar)" class="w-14 h-14 rounded-full bg-gradient-to-tr from-xamle-green to-xamle-blue text-white shadow-lg flex items-center justify-center border-4 border-xamle-bg active:scale-95 transition">
+      <i data-lucide="mic" class="w-6 h-6"></i>
+    </button>
+    <button type="button" onclick="switchTab('assistance')" data-tab="assistance" class="nav-btn nav-btn--label">Assistance</button>
+  </div>
+  <button type="button" onclick="switchTab('b2b')" data-tab="b2b" class="nav-btn"><i data-lucide="handshake" class="w-5 h-5"></i><span>B2B</span></button>
+  <button type="button" onclick="switchTab('opportunites')" data-tab="opportunites" class="nav-btn"><i data-lucide="star" class="w-5 h-5"></i><span>Opportunités</span></button>
+</nav>
+
+  <div class="home-indicator absolute bottom-1.5 inset-x-0 flex justify-center pointer-events-none z-40" aria-hidden="true">
+    <div class="w-32 h-1 bg-slate-800/25 rounded-full"></div>
+  </div>
+</div><!-- /.phone-chassis -->
+<script src="assets/data.js"></script>
+<script src="assets/store.js"></script>
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="assets/app.js"></script>
+<script>try { lucide.createIcons(); } catch (e) {}</script>
+</body>
+</html>
