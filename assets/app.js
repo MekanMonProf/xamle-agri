@@ -253,10 +253,9 @@
 
   // Bandeau photo en haut d'un onglet
   function banner(img, title, sub) {
-    return '<div class="relative h-28 rounded-2xl overflow-hidden">' +
-      '<img src="assets/img/' + img + '.jpg" alt="" class="absolute inset-0 w-full h-full object-cover object-[center_30%]">' +
-      '<div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-transparent"></div>' +
-      '<div class="absolute bottom-0 left-0 right-0 p-3.5 text-white"><h1 class="text-[18px] font-extrabold leading-tight">' + title + '</h1><p class="text-[12.5px] text-white/90">' + sub + '</p></div></div>';
+    return '<div class="relative h-32 rounded-2xl overflow-hidden bg-gradient-to-br from-xamle-green to-[#24595A]">' +
+      '<img src="assets/img/' + img + '.jpg" alt="" class="absolute right-0 top-0 h-full w-[58%] object-cover object-[center_20%]" style="-webkit-mask-image:linear-gradient(to right,transparent,#000 45%);mask-image:linear-gradient(to right,transparent,#000 45%)">' +
+      '<div class="relative h-full w-[62%] p-3.5 flex flex-col justify-end text-white"><h1 class="text-[18px] font-extrabold leading-tight">' + title + '</h1><p class="text-[12.5px] text-white/90 leading-snug mt-0.5">' + sub + '</p></div></div>';
   }
 
   /* ---------------------------------------------------------------
