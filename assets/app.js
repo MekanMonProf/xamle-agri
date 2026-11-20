@@ -190,23 +190,6 @@
     var forYou = oppData.filter(matchesProfile).sort(byStatus).slice(0, 2);
 
     $('main-content').innerHTML =
-      '<section class="bg-gradient-to-br from-xamle-green via-xamle-green to-xamle-blue rounded-3xl p-4 text-white shadow-md space-y-2">' +
-        '<div class="flex items-center justify-between gap-2">' +
-          '<span class="bg-white/20 text-[11.5px] font-bold px-2.5 py-0.5 rounded-full">' + (isProducer ? 'Espace Producteur & GIE' : 'Espace Acheteur Pro B2B') + '</span>' +
-          '<span class="text-[11.5px] text-emerald-50 font-medium">' + esc(P.region) + '</span>' +
-        '</div>' +
-        '<h1 class="text-[17px] font-extrabold leading-snug">Salam ' + esc(P.firstName) + (isProducer ? ', développez votre exploitation !' : ', sécurisez vos approvisionnements !') + '</h1>' +
-        '<p class="text-[13px] text-white/90 leading-relaxed">' +
-          (isProducer
-            ? (isFormalized ? 'Votre structure est formalisée. Vous pouvez accéder aux financements et aux marchés B2B.' : 'Passez au secteur formel pour accéder aux financements, aux banques et aux contrats B2B.')
-            : 'Trouvez des producteurs formalisés et signez des contrats d\'approvisionnement.') +
-        '</p>' +
-        '<div class="pt-1 flex items-center gap-2 flex-wrap">' +
-          '<button type="button" onclick="switchTab(\'' + (isFormalized || !isProducer ? 'b2b' : 'formalisation') + '\')" class="bg-white text-xamle-green text-[13px] font-extrabold px-3.5 py-2 rounded-xl">' +
-            (isFormalized || !isProducer ? 'Accéder au marché B2B →' : 'Me formaliser →') + '</button>' +
-          '<button type="button" onclick="openVoiceModal()" class="bg-white/15 hover:bg-white/25 text-white text-[13px] font-semibold px-3 py-2 rounded-xl flex items-center gap-1"><i data-lucide="mic" class="w-3.5 h-3.5"></i> Wolof / FR</button>' +
-        '</div>' +
-      '</section>' +
 
       '<section>' +
         '<h2 class="section-title mb-2">Les 4 piliers XAMLE AGRI</h2>' +
@@ -246,7 +229,7 @@
   // Carte pilier : photo + libellé (images dans assets/img/)
   function pillar(tab, img, title, sub) {
     return '<button type="button" onclick="switchTab(\'' + tab + '\')" class="pillar-card group">' +
-      '<span class="block overflow-hidden rounded-xl"><img src="assets/img/' + img + '.jpg?v=20261120b" alt="" class="w-full aspect-[4/3] object-cover transition duration-300 group-hover:scale-105"></span>' +
+      '<span class="block overflow-hidden rounded-xl"><img src="assets/img/' + img + '.jpg?v=20261120c" alt="" class="w-full aspect-[4/3] object-cover transition duration-300 group-hover:scale-105"></span>' +
       '<span class="pillar-label">' + title + '</span>' +
       '<span class="block text-[11.5px] text-slate-600 leading-tight text-center px-1">' + sub + '</span></button>';
   }
@@ -254,7 +237,7 @@
   // Bandeau photo en haut d'un onglet
   function banner(img, title, sub) {
     return '<div class="relative h-32 rounded-2xl overflow-hidden bg-gradient-to-br from-xamle-green to-[#24595A]">' +
-      '<img src="assets/img/' + img + '.jpg?v=20261120b" alt="" class="absolute right-0 top-0 h-full w-[58%] object-cover object-[center_20%]" style="-webkit-mask-image:linear-gradient(to right,transparent,#000 45%);mask-image:linear-gradient(to right,transparent,#000 45%)">' +
+      '<img src="assets/img/' + img + '.jpg?v=20261120c" alt="" class="absolute right-0 top-0 h-full w-[58%] object-cover object-[center_20%]" style="-webkit-mask-image:linear-gradient(to right,transparent,#000 45%);mask-image:linear-gradient(to right,transparent,#000 45%)">' +
       '<div class="relative h-full w-[62%] p-3.5 flex flex-col justify-end text-white"><h1 class="text-[18px] font-extrabold leading-tight">' + title + '</h1><p class="text-[12.5px] text-white/90 leading-snug mt-0.5">' + sub + '</p></div></div>';
   }
 
