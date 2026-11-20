@@ -195,7 +195,7 @@
         '<h2 class="section-title mb-2">Les 4 piliers XAMLE AGRI</h2>' +
         '<div class="grid grid-cols-2 gap-2.5">' +
           pillar('formalisation', 'formalisation', 'Formalisation', 'GIE, NINEA, RCCM, Carte pro') +
-          pillar('assistance', 'assistance', 'Assistance', 'Annuaire des structures d\'appui') +
+          pillar('assistance', 'assistance', 'Annuaire', '') +
           pillar('b2b', 'b2b', 'B2B', 'Contrats, stocks & services') +
           pillar('opportunites', 'opportunites', 'Opportunités', 'Subventions, programmes, vitrines') +
         '</div>' +
@@ -229,15 +229,14 @@
   // Carte pilier : photo + libellé (images dans assets/img/)
   function pillar(tab, img, title, sub) {
     return '<button type="button" onclick="switchTab(\'' + tab + '\')" class="pillar-card group">' +
-      '<span class="block overflow-hidden rounded-xl"><img src="assets/img/' + img + '.jpg?v=20261120c" alt="" class="w-full aspect-[4/3] object-cover transition duration-300 group-hover:scale-105"></span>' +
-      '<span class="pillar-label">' + title + '</span>' +
-      '<span class="block text-[11.5px] text-slate-600 leading-tight text-center px-1">' + sub + '</span></button>';
+      '<span class="block overflow-hidden rounded-xl"><img src="assets/img/' + img + '.jpg?v=20261120d" alt="" class="w-full aspect-[4/3] object-cover transition duration-300 group-hover:scale-105"></span>' +
+      '<span class="pillar-label">' + title + '</span></button>';
   }
 
   // Bandeau photo en haut d'un onglet
   function banner(img, title, sub) {
     return '<div class="relative h-32 rounded-2xl overflow-hidden bg-gradient-to-br from-xamle-green to-[#24595A]">' +
-      '<img src="assets/img/' + img + '.jpg?v=20261120c" alt="" class="absolute right-0 top-0 h-full w-[58%] object-cover object-[center_20%]" style="-webkit-mask-image:linear-gradient(to right,transparent,#000 45%);mask-image:linear-gradient(to right,transparent,#000 45%)">' +
+      '<img src="assets/img/' + img + '.jpg?v=20261120d" alt="" class="absolute right-0 top-0 h-full w-[58%] object-cover object-[center_20%]" style="-webkit-mask-image:linear-gradient(to right,transparent,#000 45%);mask-image:linear-gradient(to right,transparent,#000 45%)">' +
       '<div class="relative h-full w-[62%] p-3.5 flex flex-col justify-end text-white"><h1 class="text-[18px] font-extrabold leading-tight">' + title + '</h1><p class="text-[12.5px] text-white/90 leading-snug mt-0.5">' + sub + '</p></div></div>';
   }
 
@@ -480,7 +479,7 @@
     });
     $('main-content').innerHTML =
       '<div class="space-y-3.5">' +
-        banner('assistance', 'Assistance', 'Annuaire des ' + saeData.length + ' structures d\'appui et conseil.') +
+        banner('assistance', 'Annuaire', 'Annuaire des ' + saeData.length + ' structures d\'appui et conseil.') +
         '<div class="flex items-center justify-end gap-2">' +
           '<button type="button" onclick="openVoiceModal()" class="bg-xamle-blue text-white text-[12.5px] font-bold px-3 py-2 rounded-xl flex items-center gap-1.5 shrink-0"><i data-lucide="mic" class="w-3.5 h-3.5"></i> Assistant vocal</button></div>' +
         '<div class="relative"><i data-lucide="search" class="w-4 h-4 text-slate-500 absolute left-3 top-3"></i>' +
