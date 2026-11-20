@@ -211,10 +211,10 @@
       '<section>' +
         '<h2 class="section-title mb-2">Les 4 piliers XAMLE AGRI</h2>' +
         '<div class="grid grid-cols-2 gap-2.5">' +
-          pillar('formalisation', 'file-badge', '1. Formalisation', 'GIE, NINEA, RCCM, Carte pro', 'green') +
-          pillar('assistance', 'compass', '2. Assistance', 'Annuaire des structures d\'appui', 'blue') +
-          pillar('b2b', 'handshake', '3. Marché B2B', 'Contrats, stocks & services', 'green') +
-          pillar('opportunites', 'star', '4. Opportunités', 'Subventions, crédits, vitrines', 'blue') +
+          pillar('formalisation', 'formalisation', 'Formalisation', 'GIE, NINEA, RCCM, Carte pro') +
+          pillar('assistance', 'assistance', 'Assistance', 'Annuaire des structures d\'appui') +
+          pillar('b2b', 'b2b', 'B2B', 'Contrats, stocks & services') +
+          pillar('opportunites', 'opportunites', 'Opportunités', 'Subventions, programmes, vitrines') +
         '</div>' +
       '</section>' +
 
@@ -243,12 +243,20 @@
       '</section>';
   }
 
-  function pillar(tab, icon, title, sub, tone) {
-    var c = tone === 'green' ? 'bg-xamle-greenPale text-xamle-green' : 'bg-xamle-blueLight text-xamle-blue';
-    return '<button type="button" onclick="switchTab(\'' + tab + '\')" class="card text-left hover:border-xamle-green transition">' +
-      '<span class="w-9 h-9 rounded-xl ' + c + ' flex items-center justify-center mb-2"><i data-lucide="' + icon + '" class="w-5 h-5"></i></span>' +
-      '<span class="block font-bold text-[13px]">' + title + '</span>' +
-      '<span class="block text-[11.5px] text-slate-500 mt-0.5 leading-tight">' + sub + '</span></button>';
+  // Carte pilier : photo + libellé (images dans assets/img/)
+  function pillar(tab, img, title, sub) {
+    return '<button type="button" onclick="switchTab(\'' + tab + '\')" class="pillar-card group">' +
+      '<span class="block overflow-hidden rounded-xl"><img src="assets/img/' + img + '.jpg" alt="" class="w-full aspect-[4/3] object-cover transition duration-300 group-hover:scale-105"></span>' +
+      '<span class="pillar-label">' + title + '</span>' +
+      '<span class="block text-[11.5px] text-slate-600 leading-tight text-center px-1">' + sub + '</span></button>';
+  }
+
+  // Bandeau photo en haut d'un onglet
+  function banner(img, title, sub) {
+    return '<div class="relative h-28 rounded-2xl overflow-hidden">' +
+      '<img src="assets/img/' + img + '.jpg" alt="" class="absolute inset-0 w-full h-full object-cover object-[center_30%]">' +
+      '<div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-transparent"></div>' +
+      '<div class="absolute bottom-0 left-0 right-0 p-3.5 text-white"><h1 class="text-[18px] font-extrabold leading-tight">' + title + '</h1><p class="text-[12.5px] text-white/90">' + sub + '</p></div></div>';
   }
 
   /* ---------------------------------------------------------------
@@ -259,7 +267,7 @@
     var sub = appState.formSubTab || 'GUIDES';
     $('main-content').innerHTML =
       '<div class="space-y-3.5">' +
-        '<div><h1 class="text-[17px] font-extrabold">Formalisation</h1><p class="text-[13px] text-slate-600">Guides pas à pas et démarche en ligne.</p></div>' +
+        banner('formalisation', 'Formalisation', 'Guides pas à pas et démarche en ligne.') +
         segmented([['GUIDES', 'Guides pas à pas'], ['BCE', 'Démarche en ligne']], sub, 'setFormSubTab') +
         (sub === 'GUIDES' ? guidesList() : bceFlow()) +
       '</div>';
@@ -490,7 +498,8 @@
     });
     $('main-content').innerHTML =
       '<div class="space-y-3.5">' +
-        '<div class="flex items-start justify-between gap-2"><div><h1 class="text-[17px] font-extrabold">Annuaire & conseil</h1><p class="text-[13px] text-slate-600">' + saeData.length + ' structures d\'appui.</p></div>' +
+        banner('assistance', 'Assistance', 'Annuaire des ' + saeData.length + ' structures d\'appui et conseil.') +
+        '<div class="flex items-center justify-end gap-2">' +
           '<button type="button" onclick="openVoiceModal()" class="bg-xamle-blue text-white text-[12.5px] font-bold px-3 py-2 rounded-xl flex items-center gap-1.5 shrink-0"><i data-lucide="mic" class="w-3.5 h-3.5"></i> Assistant vocal</button></div>' +
         '<div class="relative"><i data-lucide="search" class="w-4 h-4 text-slate-500 absolute left-3 top-3"></i>' +
           '<label for="sae-search" class="sr-only">Rechercher une structure</label>' +
@@ -602,7 +611,8 @@
     var list = productsData.filter(function (p) { return appState.b2bCategoryFilter === 'TOUS' || p.category === appState.b2bCategoryFilter; });
     $('main-content').innerHTML =
       '<div class="space-y-3.5">' +
-        '<div class="flex items-center justify-between gap-2"><div><h1 class="text-[17px] font-extrabold">Marché B2B</h1><p class="text-[13px] text-slate-600">Contrats, stocks & services techniques.</p></div>' +
+        banner('b2b', 'Marché B2B', 'Contrats, stocks & services techniques.') +
+        '<div class="flex items-center justify-end gap-2 empty:hidden">' +
           (isProducts && appState.userRole === 'PRODUCTEUR' ? '<button type="button" onclick="openPublishStockModal()" class="bg-xamle-blue text-white text-[12.5px] font-bold px-3 py-2 rounded-xl flex items-center gap-1 shrink-0"><i data-lucide="plus" class="w-3.5 h-3.5"></i> Publier</button>' : '') + '</div>' +
         segmented([['PRODUITS', 'Produits & récoltes'], ['SERVICES', 'Services techniques']], appState.b2bSubTab, 'setB2BSubTab') +
         (isProducts ?
@@ -716,7 +726,7 @@
    * --------------------------------------------------------------- */
   function renderOpportunites() {
     var sub = appState.oppSubTab || 'OPPORTUNITES';
-    var html = '<div class="space-y-3.5"><div><h1 class="text-[17px] font-extrabold">Opportunités</h1><p class="text-[13px] text-slate-600">Financements, appels à projets et partenaires.</p></div>' +
+    var html = '<div class="space-y-3.5">' + banner('opportunites', 'Opportunités', 'Financements, programmes et partenaires.') +
       segmented([['OPPORTUNITES', 'Financements'], ['VITRINES', 'Vitrines']], sub, 'setOppSubTab');
 
     if (sub === 'OPPORTUNITES') {
