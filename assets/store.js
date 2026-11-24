@@ -52,3 +52,28 @@
 
   window.XamleStore = Store;
 })();
+
+/* ---------- Application installable (PWA) ---------- */
+(function () {
+  'use strict';
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+    });
+  }
+  var deferred = null;
+  function showInstall(show) {
+    document.querySelectorAll('[data-install]').forEach(function (el) { el.classList.toggle('hidden', !show); });
+  }
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    deferred = e;
+    showInstall(true);
+  });
+  window.addEventListener('appinstalled', function () { deferred = null; showInstall(false); });
+  window.installApp = function () {
+    if (!deferred) return;
+    deferred.prompt();
+    deferred.userChoice.finally(function () { deferred = null; showInstall(false); });
+  };
+})();
