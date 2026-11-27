@@ -229,14 +229,14 @@
   // Carte pilier : photo + libellé (images dans assets/img/)
   function pillar(tab, img, title, sub) {
     return '<button type="button" onclick="switchTab(\'' + tab + '\')" class="pillar-card group">' +
-      '<span class="block overflow-hidden rounded-xl"><img src="assets/img/' + img + '.jpg?v=20261124a" alt="" class="w-full aspect-[4/3] object-cover transition duration-300 group-hover:scale-105"></span>' +
+      '<span class="block overflow-hidden rounded-xl"><img src="assets/img/' + img + '.jpg?v=20261127a" alt="" class="w-full aspect-[4/3] object-cover transition duration-300 group-hover:scale-105"></span>' +
       '<span class="pillar-label">' + title + '</span></button>';
   }
 
   // Bandeau photo en haut d'un onglet
   function banner(img, title, sub) {
     return '<div class="relative h-32 rounded-2xl overflow-hidden bg-gradient-to-br from-xamle-green to-[#24595A]">' +
-      '<img src="assets/img/' + img + '.jpg?v=20261124a" alt="" class="absolute right-0 top-0 h-full w-[58%] object-cover object-[center_20%]" style="-webkit-mask-image:linear-gradient(to right,transparent,#000 45%);mask-image:linear-gradient(to right,transparent,#000 45%)">' +
+      '<img src="assets/img/' + img + '.jpg?v=20261127a" alt="" class="absolute right-0 top-0 h-full w-[58%] object-cover object-[center_20%]" style="-webkit-mask-image:linear-gradient(to right,transparent,#000 45%);mask-image:linear-gradient(to right,transparent,#000 45%)">' +
       '<div class="relative h-full w-[62%] p-3.5 flex flex-col justify-end text-white"><h1 class="text-[18px] font-extrabold leading-tight">' + title + '</h1><p class="text-[12.5px] text-white/90 leading-snug mt-0.5">' + sub + '</p></div></div>';
   }
 
@@ -802,6 +802,27 @@
   };
   Object.keys(api).forEach(function (k) { window[k] = api[k]; });
 
+  /* ---------------------------------------------------------------
+   * Contenus depuis Supabase (assets/remote.js)
+   * --------------------------------------------------------------- */
+  function applyRemote(r) {
+    if (!r) return;
+    if (r.opportunities && r.opportunities.length) oppData = r.opportunities;
+    if (r.sae && r.sae.length) saeData = r.sae;
+    if (r.guides && r.guides.length) guidesData = r.guides;
+    if (r.products && r.products.length) productsData = (appState.publishedProducts || []).concat(r.products);
+    // On ne redessine pas sous une fenêtre ouverte ni pendant une saisie.
+    var typing = document.activeElement && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+    if (!$('modal-backdrop').classList.contains('hidden') || typing) return;
+    if (appState.currentTab === 'formalisation' && appState.openGuide) { renderGuide(appState.openGuide); icons(); }
+    else switchTab(appState.currentTab);
+  }
+
   renderHeader();
   switchTab('accueil');
+
+  if (window.XamleRemote) {
+    applyRemote(window.XamleRemote.cached());
+    window.XamleRemote.load().then(applyRemote).catch(function (e) { console.warn('[XAMLE] Contenus hors ligne :', e.message); });
+  }
 })();

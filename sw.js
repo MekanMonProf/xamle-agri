@@ -1,9 +1,9 @@
 /* XAMLE AGRI — service worker : installation et fonctionnement hors connexion.
  * Changez VERSION à chaque mise à jour pour forcer le rafraîchissement du cache. */
-var VERSION = 'xamle-v20261124a';
+var VERSION = 'xamle-v20261127a';
 var CORE = [
   './', './index.html', './code.html', './profil.html', './app.html', './manifest.webmanifest',
-  './assets/app.css', './assets/app.js', './assets/auth.js', './assets/store.js', './assets/data.js', './assets/otp.js',
+  './assets/app.css', './assets/app.js', './assets/remote.js', './assets/auth.js', './assets/store.js', './assets/data.js', './assets/otp.js',
   './assets/vendor/lucide.min.js', './assets/logo-full.png', './assets/logo-mark.png', './assets/favicon.png',
   './assets/icon-192.png', './assets/icon-512.png',
   './assets/img/formalisation.jpg', './assets/img/assistance.jpg', './assets/img/b2b.jpg', './assets/img/opportunites.jpg'
